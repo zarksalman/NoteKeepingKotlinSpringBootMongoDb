@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: notes_app_with_mongo_db
+  data:
+    mongodb:
+      uri: mongodb+srv://zarksalman_db_user:Salman123@notes.tpb6xnh.mongodb.net/notes?appName=notes
+  security:
+    user:
+      password: test
