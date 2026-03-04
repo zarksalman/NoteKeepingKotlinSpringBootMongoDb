@@ -3,6 +3,9 @@ package com.shcoding.notes_app_with_mongo_db.controller
 import com.shcoding.notes_app_with_mongo_db.security.AuthService
 import com.shcoding.notes_app_with_mongo_db.security.JwtService
 import io.jsonwebtoken.security.Password
+import jakarta.validation.Valid
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.Pattern
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -15,7 +18,12 @@ class AuthController(
 ) {
 
     data class AuthRequest(
+        @field:Email(message = "Invalid email format.")
         val email: String,
+        @field:Pattern(
+            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{9,}\$",
+            message = "Password must be at least 9 characters long and contain at least one digit, uppercase and lowercase character."
+        )
         val password: String
     )
 
@@ -25,7 +33,7 @@ class AuthController(
 
     @PostMapping("/register")
     fun register(
-        @RequestBody authBody: AuthRequest
+        @Valid @RequestBody authBody: AuthRequest
     ) = authService.registerUser(authBody.email, authBody.password)
 
     @PostMapping("/login")

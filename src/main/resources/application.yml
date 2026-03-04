@@ -4,6 +4,9 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://zarksalman_db_user:Salman123@notes.tpb6xnh.mongodb.net/notes?appName=notes
-  security:
-    user:
-      password: test
+      auto-index-creation: true
+#  security:
+#    user:
+#      password: test
+server:
+  port: 8085
